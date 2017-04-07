@@ -17,11 +17,15 @@ Quick start
 
 1. Download this Taskin application
 
-  wget https://github.com/hairetdin/django-taskin/blob/master/dist/django-taskin-0.1.tar.gz
+  wget https://github.com/hairetdin/django-taskin/archive/master.zip
+
+  unzip master.zip
+
+  cd django-taskin-master
 
 2. Install
 
-  pip install django-taskin-0.1.tar.gz
+  python setup.py install
 
 3. Add 'taskin' and 'rest_framework' to your INSTALLED_APPS setting like this::
 
