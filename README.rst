@@ -48,6 +48,7 @@ Quick start
         'PAGE_SIZE': 10,
     }
 
+    import datetime
     JWT_AUTH = {
         'JWT_RESPONSE_PAYLOAD_HANDLER': 'taskin.views.jwt_response_payload_handler',
         'JWT_AUTH_HEADER_PREFIX': 'Bearer',
