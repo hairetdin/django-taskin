@@ -24,7 +24,7 @@ router.register(r'taskfiles', TaskFileViewSet)
 
 
 urlpatterns = [
-    url(r'^api/taskin/', include(router.urls)),
+    url(r'^api/', include(router.urls)),
     # backend session authentication
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # fronend jwt authentication
