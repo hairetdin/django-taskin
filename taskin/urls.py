@@ -2,7 +2,7 @@ from django.conf.urls import url, include
 from rest_framework import routers
 from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token
 
-from .views import (index, ProjectViewSet, TaskStatusViewSet,
+from .views import (index_taskin, ProjectViewSet, TaskStatusViewSet,
     TaskViewSet, ProjectMemberViewSet, TaskExecutorViewSet, UserTaskViewSet,
     PeopleViewSet, UserViewSet, TaskCommentViewSet, TaskFileViewSet,
     SessionIdJSONWebToken
@@ -31,6 +31,6 @@ urlpatterns = [
     url(r'^api/auth/login/', obtain_jwt_token),
     url(r'^api/auth/token-sessionid/', SessionIdJSONWebToken),
     url(r'^api/auth/verify-token/', verify_jwt_token),
-    url(r'^$', index, name='taskin'),
-    url(r'^(?P<path>.*)/$', index), # for any other request
+    url(r'^$', index_taskin, name='taskin'),
+    url(r'^(?P<path>.*)/$', index_taskin), # for any other request
 ]

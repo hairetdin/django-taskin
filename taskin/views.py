@@ -22,6 +22,12 @@ from .permissions import (IsMember, IsProjectMember, IsExecutorProjectMember,
                             IsAuthenticatedReadOnly)
 
 
+# show fronend index
+def index_taskin(request, path=''):
+    response = render(request, 'index-taskin.html')
+    return response
+
+
 # extend jwt response
 def jwt_response_payload_handler(token, user=None, request=None):
     return {
@@ -58,12 +64,6 @@ def SessionIdJSONWebToken(request):
             # if not user session return error 401
             response_data = {"error":"User session not found."}
             return Response(response_data, status=status.HTTP_401_UNAUTHORIZED)
-
-
-# show fronend index
-def index(request, path=''):
-    response = render(request, 'index.html')
-    return response
 
 
 # rest api bellow

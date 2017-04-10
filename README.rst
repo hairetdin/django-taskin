@@ -8,6 +8,8 @@ Taskin is a Django app for task management. Create many projects and tasks.
 Required
 --------
 
+Python 3.x
+
 * pip install djangorestframework
 * pip install djangorestframework-jwt
 
@@ -15,17 +17,15 @@ Required
 Quick start
 -----------
 
-1. Download this Taskin application
+1. Clone this Taskin application
 
-  wget https://github.com/hairetdin/django-taskin/archive/master.zip
+  git clone https://github.com/hairetdin/django-taskin.git
 
-  unzip master.zip
-
-  cd django-taskin-master
+  cd django-taskin
 
 2. Install
 
-  python setup.py install
+  pip install dist/django-taskin-0.1.tar.gz
 
 3. Add 'taskin' and 'rest_framework' to your INSTALLED_APPS setting like this::
 
@@ -64,3 +64,9 @@ Quick start
 6. Run `python manage.py migrate` to create the taskin models.
 
 7. Visit http://127.0.0.1:8000/taskin/ to create new project and task.
+
+
+Uninstall
+---------
+
+  pip uninstall django-taskin
