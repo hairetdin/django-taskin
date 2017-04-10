@@ -63,7 +63,11 @@ Quick start
 
 6. Run `python manage.py migrate` to create the taskin models.
 
-7. Visit http://127.0.0.1:8000/taskin/ to create new project and task.
+7. Run server
+
+  python manage.py runserver
+
+8. Visit http://127.0.0.1:8000/taskin/ to create new project and task.
 
 
 Uninstall
