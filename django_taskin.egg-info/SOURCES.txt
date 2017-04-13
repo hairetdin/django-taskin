@@ -20,7 +20,7 @@ taskin/migrations/__init__.py
 taskin/static/taskin/crossdomain.xml
 taskin/static/taskin/index.html
 taskin/static/taskin/robots.txt
-taskin/static/taskin/assets/ember-taskin-03dac61f48f7ccdae5ae0aa2db976ec8.js
+taskin/static/taskin/assets/ember-taskin-59b81f902f59681e8a6b792ecce52317.js
 taskin/static/taskin/assets/ember-taskin-cd507f10f1eb6d96c8c44db034f28a4f.css
 taskin/static/taskin/assets/vendor-5e5e50faf918e2fd498aad7de8a1c7a3.css
 taskin/static/taskin/assets/vendor-c21efce617b111149f04002af8a2732a.js

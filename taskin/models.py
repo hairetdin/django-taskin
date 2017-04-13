@@ -2,6 +2,8 @@
 
 from django.db import models
 from django.db.models import signals
+from django.core.mail import send_mail
+from django.conf import settings
 
 from django.contrib.auth.models import User
 
@@ -169,31 +171,50 @@ signals.post_save.connect(exectask_closed, sender=TaskExecutor)
 # add project creator to project members
 def project_created(sender, instance, created, **kwargs):
     #add creator to members for this project
-    new_member = ProjectMember(
-        user=instance.creator,
-        project=instance,
-        right='AD'
-    )
-    new_member.save()
-
-    #create taskstatuses for this project
-    new_taskstatus = TaskStatus(name='New', project=instance, order=1)
-    new_taskstatus.save()
-    new_taskstatus = TaskStatus(name='In execute', project=instance, order=2)
-    new_taskstatus.save()
-    new_taskstatus = TaskStatus(name='Completed', project=instance, order=3)
-    new_taskstatus.save()
-
-    #create example task
-    new_task = Task(
-        creator=instance.creator,
-        #customer=instance.creator,
-        subject='The task example',
-        reason='For show this example',
-        about='This task created as example',
-        project=instance,
-        status=new_taskstatus
+    if instance.projectmember_set.all().count() == 0:
+        new_member = ProjectMember(
+            user=instance.creator,
+            project=instance,
+            right='AD'
         )
-    new_task.save()
+        new_member.save()
+
+        #create taskstatuses for this project
+        new_taskstatus = TaskStatus(name='New', project=instance, order=1)
+        new_taskstatus.save()
+        new_taskstatus = TaskStatus(name='In execute', project=instance, order=2)
+        new_taskstatus.save()
+        new_taskstatus = TaskStatus(name='Completed', project=instance, order=3)
+        new_taskstatus.save()
+
+        #create example task
+        new_task = Task(
+            creator=instance.creator,
+            #customer=instance.creator,
+            subject='The task example',
+            reason='For show this example',
+            about='This task created as example',
+            project=instance,
+            status=new_taskstatus
+            )
+        new_task.save()
 
 signals.post_save.connect(project_created, sender=Project)
+
+
+DEFAULT_FROM_EMAIL = getattr(settings, "DEFAULT_FROM_EMAIL", None)
+# when new task created
+# post_save signal from Task to send email to executor
+def task_created(sender, instance, created, **kwargs):
+    recipient_list = []
+    for executor in instance.executors.all():
+        recipient_list.append(executor.user.email)
+    send_mail(
+        instance.subject,
+        instance.about,
+        DEFAULT_FROM_EMAIL,
+        recipient_list,
+        fail_silently=False,
+    )
+
+signals.post_save.connect(task_created, sender=Task)

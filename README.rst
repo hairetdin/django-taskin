@@ -57,17 +57,31 @@ Quick start
         'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=12),
     }
 
-5. Include the taskin URLconf in your project urls.py like this::
+5 Add email settings for send notification to user about task::
+
+  EMAIL_HOST = ''
+  EMAIL_PORT = ''
+  EMAIL_HOST_USER = ''
+  EMAIL_HOST_PASSWORD = ''
+  DEFAULT_FROM_EMAIL = ''
+
+  Mail is sent using the SMTP host and port specified in the EMAIL_HOST and EMAIL_PORT settings.
+  The EMAIL_HOST_USER and EMAIL_HOST_PASSWORD settings,
+  if set, are used to authenticate to the SMTP server,
+  and the EMAIL_USE_TLS and EMAIL_USE_SSL settings control whether a secure connection is used.
+  See https://docs.djangoproject.com/en/dev/ref/settings
+
+6. Include the taskin URLconf in your project urls.py like this::
 
     url(r'^taskin/', include('taskin.urls')),
 
-6. Run `python manage.py migrate` to create the taskin models.
+7. Run `python manage.py migrate` to create the taskin models.
 
-7. Run server
+8. Run server
 
   python manage.py runserver
 
-8. Visit http://127.0.0.1:8000/taskin/ to create new project and task.
+9. Visit http://127.0.0.1:8000/taskin/ to create new project and task.
 
 
 Uninstall
