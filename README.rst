@@ -84,19 +84,15 @@ User email address take from user.email field.
 
 7. Run `python manage.py migrate` to create the taskin models.
 
-8. Run server
-
-  ::
+8. Run server::
 
   python manage.py runserver
 
 9. Visit http://127.0.0.1:8000/taskin/ to create new project and task.
 
 
-Uninstall
+Uninstall::
 ---------
-
-  ::
 
   pip uninstall django-taskin
 
