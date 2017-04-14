@@ -86,15 +86,17 @@ User email address take from user.email field.
 
 8. Run server::
 
-  python manage.py runserver
+    python manage.py runserver
 
 9. Visit http://127.0.0.1:8000/taskin/ to create new project and task.
 
 
-Uninstall::
+Uninstall
 ---------
 
-  pip uninstall django-taskin
+::
+
+    pip uninstall django-taskin
 
 Internationalization
 --------------------
