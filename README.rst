@@ -57,7 +57,7 @@ Quick start
         'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=12),
     }
 
-5 Add email settings for send notification to user about task::
+5. Add email settings for send notification to user about task::
 
   EMAIL_HOST = ''
   EMAIL_PORT = ''
@@ -72,14 +72,15 @@ and the EMAIL_USE_TLS and EMAIL_USE_SSL settings control whether a secure connec
 See https://docs.djangoproject.com/en/dev/ref/settings for more detail.
 
 User get notify to email If you add
+
   TASKIN_DEFAULT_FROM_EMAIL = 'your.email@your-domain.com'
+
 in settings.
 User email address take from user.email field.
 
-
 6. Include the taskin URLconf in your project urls.py like this::
 
-    url(r'^taskin/', include('taskin.urls')),
+  url(r'^taskin/', include('taskin.urls')),
 
 7. Run `python manage.py migrate` to create the taskin models.
 
