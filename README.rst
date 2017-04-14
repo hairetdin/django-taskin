@@ -59,11 +59,11 @@ Quick start
 
 5. Add email settings for send notification to user about task::
 
-  EMAIL_HOST = ''
-  EMAIL_PORT = ''
-  EMAIL_HOST_USER = ''
-  EMAIL_HOST_PASSWORD = ''
-  DEFAULT_FROM_EMAIL = ''
+    EMAIL_HOST = ''
+    EMAIL_PORT = ''
+    EMAIL_HOST_USER = ''
+    EMAIL_HOST_PASSWORD = ''
+    DEFAULT_FROM_EMAIL = ''
 
 Mail is sent using the SMTP host and port specified in the EMAIL_HOST and EMAIL_PORT settings.
 The EMAIL_HOST_USER and EMAIL_HOST_PASSWORD settings,
@@ -73,14 +73,14 @@ See https://docs.djangoproject.com/en/dev/ref/settings for more detail.
 
 User get notify to email If you add
 
-  TASKIN_DEFAULT_FROM_EMAIL = 'your.email@your-domain.com'
+    TASKIN_DEFAULT_FROM_EMAIL = 'your.email@your-domain.com'
 
 in settings.
 User email address take from user.email field.
 
 6. Include the taskin URLconf in your project urls.py like this::
 
-  url(r'^taskin/', include('taskin.urls')),
+    url(r'^taskin/', include('taskin.urls')),
 
 7. Run `python manage.py migrate` to create the taskin models.
 
