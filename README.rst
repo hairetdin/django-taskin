@@ -17,13 +17,13 @@ Python 3.x
 Quick start
 -----------
 
-1. Clone this Taskin application
+1. Clone this Taskin application::
 
   git clone https://github.com/hairetdin/django-taskin.git
 
   cd django-taskin
 
-2. Install
+2. Install::
 
   pip install dist/django-taskin-0.1.tar.gz
 
@@ -71,7 +71,7 @@ if set, are used to authenticate to the SMTP server,
 and the EMAIL_USE_TLS and EMAIL_USE_SSL settings control whether a secure connection is used.
 See https://docs.djangoproject.com/en/dev/ref/settings for more detail.
 
-User get notify to email If you add
+User get notify to email If you add::
 
     TASKIN_DEFAULT_FROM_EMAIL = 'your.email@your-domain.com'
 
@@ -84,14 +84,14 @@ User email address take from user.email field.
 
 7. Run `python manage.py migrate` to create the taskin models.
 
-8. Run server
+8. Run server::
 
   python manage.py runserver
 
 9. Visit http://127.0.0.1:8000/taskin/ to create new project and task.
 
 
-Uninstall
+Uninstall::
 ---------
 
   pip uninstall django-taskin
@@ -101,7 +101,7 @@ Internationalization
 
 There are available two language: english and russian. English - default.
 
-Add settings to settings.py to apply Russian translation
+Add settings to settings.py to apply Russian translation::
 
     LANGUAGE_CODE = 'ru-ru'
     #LANGUAGE_CODE = 'en-us'
