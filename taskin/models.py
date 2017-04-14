@@ -4,6 +4,7 @@ from django.db import models
 from django.db.models import signals
 from django.core.mail import send_mail
 from django.conf import settings
+from django.utils.translation import ugettext
 
 from django.contrib.auth.models import User
 
@@ -52,9 +53,9 @@ class ProjectMember(models.Model):
     EXECUTOR = 'EX'
     WATCHER = 'WA'
     PROJECT_RIGHT_CHOICES = (
-        (ADMINISTRATOR, 'Administrator'),
-        (EXECUTOR, 'Executor'),
-        (WATCHER, 'Watcher'),
+        (ADMINISTRATOR, ugettext('Administrator')),
+        (EXECUTOR, ugettext('Executor')),
+        (WATCHER, ugettext('Watcher')),
     )
     user = models.ForeignKey(User)
     project = models.ForeignKey(Project)
@@ -180,20 +181,20 @@ def project_created(sender, instance, created, **kwargs):
         new_member.save()
 
         #create taskstatuses for this project
-        new_taskstatus = TaskStatus(name='New', project=instance, order=1)
+        new_taskstatus = TaskStatus(name=ugettext('New'), project=instance, order=1)
         new_taskstatus.save()
-        new_taskstatus = TaskStatus(name='In execute', project=instance, order=2)
+        new_taskstatus = TaskStatus(name=ugettext('In execute'), project=instance, order=2)
         new_taskstatus.save()
-        new_taskstatus = TaskStatus(name='Completed', project=instance, order=3)
+        new_taskstatus = TaskStatus(name=ugettext('Completed'), project=instance, order=3)
         new_taskstatus.save()
 
         #create example task
         new_task = Task(
             creator=instance.creator,
             #customer=instance.creator,
-            subject='The task example',
-            reason='For show this example',
-            about='This task created as example',
+            subject=ugettext('The task example'),
+            reason=ugettext('For show this example'),
+            about=ugettext('This task created as example'),
             project=instance,
             status=new_taskstatus
             )
@@ -228,9 +229,9 @@ def task_created(sender, instance, created, **kwargs):
             except:
                 date_exec_max = ''
 
-            message = 'Customer: ' + customer + '\n' + \
-                'Task detail: ' + '\n' + about + '\n' + \
-                'Deadline for execution: ' + date_exec_max
+            message = ugettext('Customer: ') + customer + '\n' + '\n' + \
+                ugettext('Task detail: ') + '\n' + about + '\n' + '\n' + \
+                ugettext('Deadline for execution: ') + date_exec_max
 
             send_mail(
                 subject,

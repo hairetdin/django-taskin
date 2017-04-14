@@ -95,3 +95,26 @@ Uninstall
 ---------
 
   pip uninstall django-taskin
+
+Internationalization
+--------------------
+
+There are available two language: english and russian. English - default.
+
+Add settings to settings.py to apply Russian translation
+
+    LANGUAGE_CODE = 'ru-ru'
+    #LANGUAGE_CODE = 'en-us'
+
+    TIME_ZONE = 'UTC'
+
+    USE_I18N = True
+
+    USE_L10N = True
+
+    USE_TZ = True
+
+    LOCALE_PATHS = [
+        #os.path.join(BASE_DIR, 'locale'),
+        os.path.join(BASE_DIR, "taskin/locale"),
+    ]
