@@ -206,16 +206,38 @@ TASKIN_DEFAULT_FROM_EMAIL = getattr(settings, "DEFAULT_FROM_EMAIL", None)
 # when new task created
 # post_save signal from Task to send email to executor
 def task_created(sender, instance, created, **kwargs):
-    if TASKIN_DEFAULT_FROM_EMAIL:
-        recipient_list = []
-        for executor in instance.executors.all():
-            recipient_list.append(executor.user.email)
-        send_mail(
-            instance.subject,
-            instance.about,
-            TASKIN_DEFAULT_FROM_EMAIL,
-            recipient_list,
-            fail_silently=False,
-        )
+    if TASKIN_DEFAULT_FROM_EMAIL and created:
+        if instance.executor.user.email:
+            subject = 'Taskin: ' + instance.task.subject
 
-signals.post_save.connect(task_created, sender=Task)
+            recipient_list = []
+            recipient_list.append(instance.executor.user.email)
+
+            try:
+                customer = instance.task.customer.name
+            except:
+                customer = ''
+
+            try:
+                about = instance.task.about
+            except:
+                about = ''
+
+            try:
+                date_exec_max = instance.task.date_exec_max.strftime("%d/%m/%y %H:%m")
+            except:
+                date_exec_max = ''
+
+            message = 'Customer: ' + customer + '\n' + \
+                'Task detail: ' + '\n' + about + '\n' + \
+                'Deadline for execution: ' + date_exec_max
+
+            send_mail(
+                subject,
+                message,
+                TASKIN_DEFAULT_FROM_EMAIL,
+                recipient_list,
+                fail_silently=False,
+            )
+
+signals.post_save.connect(task_created, sender=TaskExecutor)
