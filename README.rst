@@ -101,7 +101,7 @@ Uninstall
 Internationalization
 --------------------
 
-There are available two language: english and russian. English - default.
+There are available two language: English and Russian. English - default.
 
 Add settings to settings.py to apply Russian translation::
 
