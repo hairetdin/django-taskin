@@ -69,7 +69,12 @@ Quick start
   The EMAIL_HOST_USER and EMAIL_HOST_PASSWORD settings,
   if set, are used to authenticate to the SMTP server,
   and the EMAIL_USE_TLS and EMAIL_USE_SSL settings control whether a secure connection is used.
-  See https://docs.djangoproject.com/en/dev/ref/settings
+  See https://docs.djangoproject.com/en/dev/ref/settings for more detail.
+
+  User get notify to email If you add TASKIN_DEFAULT_FROM_EMAIL = 'your.email@your-domain.com'
+  in settings.
+  User email address take from user.email field.
+
 
 6. Include the taskin URLconf in your project urls.py like this::
 

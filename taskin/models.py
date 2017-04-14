@@ -202,19 +202,20 @@ def project_created(sender, instance, created, **kwargs):
 signals.post_save.connect(project_created, sender=Project)
 
 
-DEFAULT_FROM_EMAIL = getattr(settings, "DEFAULT_FROM_EMAIL", None)
+TASKIN_DEFAULT_FROM_EMAIL = getattr(settings, "DEFAULT_FROM_EMAIL", None)
 # when new task created
 # post_save signal from Task to send email to executor
 def task_created(sender, instance, created, **kwargs):
-    recipient_list = []
-    for executor in instance.executors.all():
-        recipient_list.append(executor.user.email)
-    send_mail(
-        instance.subject,
-        instance.about,
-        DEFAULT_FROM_EMAIL,
-        recipient_list,
-        fail_silently=False,
-    )
+    if TASKIN_DEFAULT_FROM_EMAIL:
+        recipient_list = []
+        for executor in instance.executors.all():
+            recipient_list.append(executor.user.email)
+        send_mail(
+            instance.subject,
+            instance.about,
+            TASKIN_DEFAULT_FROM_EMAIL,
+            recipient_list,
+            fail_silently=False,
+        )
 
 signals.post_save.connect(task_created, sender=Task)
