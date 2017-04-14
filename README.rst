@@ -19,13 +19,13 @@ Quick start
 
 1. Clone this Taskin application::
 
-  git clone https://github.com/hairetdin/django-taskin.git
+    git clone https://github.com/hairetdin/django-taskin.git
 
-  cd django-taskin
+    cd django-taskin
 
 2. Install::
 
-  pip install dist/django-taskin-0.1.tar.gz
+    pip install dist/django-taskin-0.1.tar.gz
 
 3. Add 'taskin' and 'rest_framework' to your INSTALLED_APPS setting like this::
 
