@@ -1,9 +1,12 @@
 from rest_framework import serializers
 #import os
 from django.contrib.auth.models import User
+from django.conf import settings
 from .models import (Project, TaskStatus, Task, ProjectMember, TaskExecutor,
-    TaskComment, TaskFile, Person)
-
+    TaskComment, TaskFile)
+PERSON_MODEL = getattr(settings, "TASKIN_PERSON_MODEL", 'taskin.Person')
+from django.apps import apps
+PERSON = apps.get_model(PERSON_MODEL)
 
 class JwtUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,14 +34,21 @@ class TaskFileSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     projects_member = serializers.PrimaryKeyRelatedField(many=True, queryset=Project.objects.all(), required=False)
     projectmember_set = serializers.PrimaryKeyRelatedField(many=True, queryset=ProjectMember.objects.all(), required=False)
+    if PERSON_MODEL == 'taskin.Person':
+        person = serializers.PrimaryKeyRelatedField(source='taskin_person', queryset=PERSON.objects.all(), required=False)
+    else:
+        person = serializers.PrimaryKeyRelatedField(queryset=PERSON.objects.all(), required=False)
+    #person = serializers.PrimaryKeyRelatedField(source='taskin_person', read_only='True')
 
     class Meta:
         model = User
+        #fields = '__all__'
         fields = ('id', 'url', 'username', 'first_name', 'last_name',
                 'email', 'is_superuser', 'person',
                 'project_creator', 'tasks_creator', 'projects_member',
                 'projectmember_set', 'taskfiles_creator',
                 )
+        #read_only_fields = ('person',)
 
 
 class TaskCommentSerializer(serializers.ModelSerializer):
@@ -50,7 +60,7 @@ class TaskCommentSerializer(serializers.ModelSerializer):
 class PeopleSerializer(serializers.ModelSerializer):
     tasks_customer = serializers.PrimaryKeyRelatedField(many=True, queryset=Task.objects.all(), required=False)
     class Meta:
-        model = Person
+        model = PERSON
         fields = ('id', 'user', 'name', 'creator', 'tasks_customer',)
 
 

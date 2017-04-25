@@ -25,15 +25,15 @@ Description: ======
         Quick start
         -----------
         
-        1. Clone this Taskin application
+        1. Clone this Taskin application::
         
-          git clone https://github.com/hairetdin/django-taskin.git
+            git clone https://github.com/hairetdin/django-taskin.git
         
-          cd django-taskin
+            cd django-taskin
         
-        2. Install
+        2. Install::
         
-          pip install dist/django-taskin-0.1.tar.gz
+            pip install dist/django-taskin-0.1.tar.gz
         
         3. Add 'taskin' and 'rest_framework' to your INSTALLED_APPS setting like this::
         
@@ -79,7 +79,7 @@ Description: ======
         and the EMAIL_USE_TLS and EMAIL_USE_SSL settings control whether a secure connection is used.
         See https://docs.djangoproject.com/en/dev/ref/settings for more detail.
         
-        User get notify to email If you add
+        User get notify to email If you add::
         
             TASKIN_DEFAULT_FROM_EMAIL = 'your.email@your-domain.com'
         
@@ -92,9 +92,9 @@ Description: ======
         
         7. Run `python manage.py migrate` to create the taskin models.
         
-        8. Run server
+        8. Run server::
         
-          python manage.py runserver
+            python manage.py runserver
         
         9. Visit http://127.0.0.1:8000/taskin/ to create new project and task.
         
@@ -102,7 +102,43 @@ Description: ======
         Uninstall
         ---------
         
-          pip uninstall django-taskin
+        ::
+        
+            pip uninstall django-taskin
+        
+        Internationalization
+        --------------------
+        
+        There are available two language: English and Russian. English - default.
+        
+        Add settings to settings.py to apply Russian translation::
+        
+            LANGUAGE_CODE = 'ru-ru'
+            #LANGUAGE_CODE = 'en-us'
+        
+            TIME_ZONE = 'UTC'
+        
+            USE_I18N = True
+        
+            USE_L10N = True
+        
+            USE_TZ = True
+        
+            LOCALE_PATHS = [
+                #os.path.join(BASE_DIR, 'locale'),
+                os.path.join(BASE_DIR, "taskin/locale"),
+            ]
+        
+        
+        Additional settings
+        -------------------
+        
+        You can change Person model, need TASKIN_PERSON_MODEL add to  settings.py in
+        your project::
+        
+            TASKIN_PERSON_MODEL = 'app.Person'
+        
+        where app - app name and Person is a model in app
         
 Platform: UNKNOWN
 Classifier: Environment :: Web Environment

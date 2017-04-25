@@ -120,3 +120,14 @@ Add settings to settings.py to apply Russian translation::
         #os.path.join(BASE_DIR, 'locale'),
         os.path.join(BASE_DIR, "taskin/locale"),
     ]
+
+
+Additional settings
+-------------------
+
+You can change Person model, need TASKIN_PERSON_MODEL add to  settings.py in
+your project::
+
+    TASKIN_PERSON_MODEL = 'app.Person'
+
+where app - app name and Person is a model in app

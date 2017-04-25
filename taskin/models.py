@@ -10,9 +10,9 @@ from django.contrib.auth.models import User
 
 
 class Person(models.Model):
-    user = models.OneToOneField(User, blank=True, null=True)
+    user = models.OneToOneField(User, related_name="taskin_person", blank=True, null=True)
     name = models.CharField(max_length = 250)
-    creator = models.ForeignKey(User, related_name="person_creator",
+    creator = models.ForeignKey(User, related_name="taskin_person_creator",
         verbose_name = "Who created")
 
     def __str__(self):
@@ -79,7 +79,7 @@ class ProjectMember(models.Model):
             return True
         return False
 
-
+PERSON_MODEL = getattr(settings, "TASKIN_PERSON_MODEL", Person)
 class Task(models.Model):
     project = models.ForeignKey(Project, related_name='tasks',)
     subtask = models.ForeignKey('self', blank=True, null=True)
@@ -90,7 +90,7 @@ class Task(models.Model):
         verbose_name = "Who created"
     )
     customer = models.ForeignKey(
-        Person,
+        PERSON_MODEL,
         related_name='tasks_customer',
         blank=True,
         null=True
@@ -213,6 +213,9 @@ def task_created(sender, instance, created, **kwargs):
 
             recipient_list = []
             recipient_list.append(instance.executor.user.email)
+            customer = ''
+            about = ''
+            date_exec_max = ''
 
             try:
                 customer = instance.task.customer.name
@@ -229,9 +232,12 @@ def task_created(sender, instance, created, **kwargs):
             except:
                 date_exec_max = ''
 
+            '''
             message = ugettext('Customer: ') + customer + '\n' + '\n' + \
                 ugettext('Task detail: ') + '\n' + about + '\n' + '\n' + \
-                ugettext('Deadline for execution: ') + date_exec_max
+                ugettext('Deadline for execution: ') + date_exec_max.
+            '''
+            message = ugettext('Customer: ') + customer
 
             send_mail(
                 subject,
